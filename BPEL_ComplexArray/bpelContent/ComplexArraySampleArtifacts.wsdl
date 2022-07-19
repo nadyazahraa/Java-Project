@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<definitions name="ComplexArraySample"
+        targetNamespace="http://complexarray.bpel.tps"
+        xmlns:tns="http://complexarray.bpel.tps"
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        >
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of types participating in this BPEL process 
+     The BPEL Designer will generate default request and response types
+     but you can define or import any XML Schema type and use them as part 
+     of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <types>
+        <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+                targetNamespace="http://complexarray.bpel.tps" 
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="ComplexArraySampleRequest">
+                <complexType>
+                    <sequence minOccurs="1" maxOccurs="unbounded">
+                        <element name="input" type="tns:People"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="ComplexArraySampleResponse">
+                <complexType>
+                    <sequence>
+                    	<element name="result" type="tns:People" />
+                    	<element name="total" type="int"></element>
+                    </sequence>
+                </complexType>
+            </element>
+        
+        
+            <complexType name="People">
+            	<sequence>
+            		<element name="name" type="string"></element>
+            		<element name="age" type="int"></element>
+            	</sequence>
+            </complexType>
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     MESSAGE TYPE DEFINITION - Definition of the message types used as 
+     part of the port type defintions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="ComplexArraySampleRequestMessage">
+        <part name="payload" element="tns:ComplexArraySampleRequest"/>
+    </message>
+    <message name="ComplexArraySampleResponseMessage">
+        <part name="payload" element="tns:ComplexArraySampleResponse"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the ComplexArraySample BPEL process -->
+    <portType name="ComplexArraySample">
+        <operation name="process">
+            <input  message="tns:ComplexArraySampleRequestMessage" />
+            <output message="tns:ComplexArraySampleResponseMessage"/>
+        </operation>
+    </portType>   
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="ComplexArraySample">
+        <plnk:role name="ComplexArraySampleProvider" portType="tns:ComplexArraySample"/>
+    </plnk:partnerLinkType>
+    
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     BINDING DEFINITION - Defines the message format and protocol details
+     for a web service.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <binding name="ComplexArraySampleBinding" type="tns:ComplexArraySample">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<operation name="process">
+    		<soap:operation
+    			soapAction="http://complexarray.bpel.tps/process" />
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+    </binding>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="ComplexArraySampleService">
+    	<port name="ComplexArraySamplePort" binding="tns:ComplexArraySampleBinding">
+    		<soap:address location="http://localhost:8082/ode/processes/ComplexArraySample" />
+    	</port>
+    </service>
+</definitions>

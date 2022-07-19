@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/lucene-core-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/lucene-queries-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/CIIA_Korean-master/lib/weka.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/CIIA_Korean-master/CIIA_Korean-master/lib/junit-4.8.2.jar"/>
+	<classpathentry kind="output" path="src/java"/>
+</classpath>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/ShowService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ShowService" targetNamespace="http://www.example.org/ShowService/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/ShowService/">
+      <xsd:element name="Cek_ID">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Cek_IDResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ID" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Cek_IDRequest">
+    <wsdl:part element="tns:Cek_ID" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Cek_IDResponse">
+    <wsdl:part element="tns:Cek_IDResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ShowService">
+    <wsdl:operation name="Cek_ID">
+      <wsdl:input message="tns:Cek_IDRequest"/>
+      <wsdl:output message="tns:Cek_IDResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ShowServiceSOAP" type="tns:ShowService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Cek_ID">
+      <soap:operation soapAction="http://www.example.org/ShowService/Cek_ID"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ShowService">
+    <wsdl:port binding="tns:ShowServiceSOAP" name="ShowServiceSOAP">
+      <soap:address location="http://localhost:8082/Show_ID/services/ShowService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
